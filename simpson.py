@@ -77,8 +77,8 @@ for i in Partition:
     q=h(i) * Length 
     SumaIzquierda = SumaIzquierda +q
 q=0
-print("suma Izquierda es igual a: ")
-print(SumaIzquierda)
+""" print("suma Izquierda es igual a: ")
+print(SumaIzquierda) """
 
 
 #------------------------------------------------------------------------Comienza suma de rieman Derecha------------------------------------------------------------  
@@ -102,13 +102,13 @@ for i in Partition:
     q=h(i)*Length
     SumaDerecha= SumaDerecha + q
 
-print("Suma derecha es igual a: ")
-print(SumaDerecha)
+""" print("Suma derecha es igual a: ")
+print(SumaDerecha) """
 
 #----------------------------------------------------------------------Comienza suma de rieman Punto medio--------------------------------------------------------
 Xv4=[]
 Yv4=[0]
-b=0
+b=0.0
 
 for i in Partition:              #crea la lista de puntos medios y la guarda en Yv4p
   if b==0:
@@ -129,8 +129,8 @@ SumaPuntom=0
 for i in Xv4:
   q=h(i)*Length
   SumaPuntom= SumaPuntom + q
-print("suma Punto Medio es Igual a :")
-print(SumaPuntom)
+""" print("suma Punto Medio es Igual a :")
+print(SumaPuntom) """
  
 
 
@@ -167,6 +167,7 @@ plt.plot(Xv2 , Yv6, label="Trapecios")
 
 #--------------------------------------------------------------------------Comienza simpson------------------------------------------------------
 a=0
+e=0
 Xv7=[]
 f=0
 g=0
@@ -174,49 +175,40 @@ l=0
 d=0
 
 for i in Partition:
-  c=c+1
-  if c==1:
+  if Partition.index(i) == 0:
     Xv7=Xv7+[i]
-  if c>1 and c< P+1:
+  elif Partition.index(i) >= len(Partition) - 1:
+    Xv7=Xv7+[i]
+  else: 
     Xv7=Xv7+[i,i]
-  if c== P+1:
-    Xv7=Xv7+[i]
-c=0
+
 for i in Xv7:
-  if c==0:
-    a=i
-    c=1
-    print("c=1")
-  elif c==1:
-    print("c=2")
-    b=i
-    c=2
-  elif c==2:
-    print("c=3")
-    f=np.array([[(a*a),a,1],[(b*b),b,1],[(i*i),i,1]])
-    g=np.array([h(a),h(b),h(i)])
-    print(f)
-    print(g)
-    print("start the problem");
+  a = i
+  if Partition.index(i) <= len(Partition) - 2:
+    e = Partition[Partition.index(i) + 1]  
+    b = (a+e)/2
+    print("a", a, "e", e, "b", b)
+    f=np.array([[(a*a),a,1],[(b*b),b,1],[(e*e),e,1]])
+    g=np.array([h(a),h(b),h(e)])
+    print("f", f, "g", g)
     l=np.linalg.solve(f,g)
+    print("l", l, "i", Partition.index(i))
 
-    c=0
-    for i in l:
-      if d==1:
-        a=i
-        d=2
-      elif d==2:
-        b=i
-        d=3
-      elif d==3:
+for i in l:
+  if d==1:
+    a=i
+    d=2
+  elif d==2:
+    b=i
+    d=3
+  elif d==3:
 
-        def o(x):
+    def o(x):
 
-          return (x*x*a) + (x*b) + i
-          d=0
-          x= np.linspace(A,B,100)
-          plt.plot((x,o(x)))
-       
+      return (x*x*a) + (x*b) + i
+      d=0
+      x= np.linspace(A,B,100)
+      plt.plot((x,o(x)))
   
 
 #----------------------------------------------------------------------Configuración de grafica------------------------------------------------------------------
