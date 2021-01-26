@@ -197,6 +197,7 @@ for i in Xv7:
     g=np.array([h(a),h(b),h(i)])
     print(f)
     print(g)
+    print("start the problem");
     l=np.linalg.solve(f,g)
 
     c=0
@@ -214,12 +215,9 @@ for i in Xv7:
           return (x*x*a) + (x*b) + i
           d=0
           x= np.linspace(A,B,100)
-          ptl.plot((x,o(x)))
+          plt.plot((x,o(x)))
        
   
-
-  
-
 
 #----------------------------------------------------------------------Configuración de grafica------------------------------------------------------------------
 H=1.5
